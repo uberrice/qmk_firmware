@@ -35,3 +35,12 @@ TAP_DANCE_ENABLE = yes
 
 # Dynamic Tapping Term:
 DYNAMIC_TAPPING_TERM_ENABLE = no
+
+# Trim off some features to free up space.
+SPACE_CADET_ENABLE = no
+GRAVE_ESC_ENABLE = no 
+MAGIC_ENABLE = no
+MUSIC_ENABLE = no
+VERBOSE = no
+CONSOLE_ENABLE = no
+COMMAND_ENABLE = no
