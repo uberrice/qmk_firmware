@@ -22,8 +22,12 @@
 /* Set tapdance speed */
 // @todo - turn this back on when it's removed from the default settings. (Awaitng pull request)
 #define TAPPING_TERM 210
-// Overrides default resolution of 2
-#define ENCODER_RESOLUTION 1
+
+/* Clear out the default encoder resolution, effectively setting it to "1" */
+#ifdef ENCODER_RESOLUTION
+    #undef ENCODER_RESOLUTION
+#endif
+
 /* Allows for the setting of constant mouse speed levels. */
 /* Delay between pressing a movement key and cursor movement */
 #define MOUSEKEY_DELAY 10
@@ -85,7 +89,7 @@
 #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_CYCLE_OUT_IN_DUAL
 
 // Animations
-// Uncomment any that you want to try. Limited by
+// Uncomment any that you want to try. Lifmited by
 // space on the microcontroller. The defines below
 // mirror the order they animations will cycle through.
 
