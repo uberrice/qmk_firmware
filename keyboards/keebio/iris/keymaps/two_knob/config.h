@@ -12,7 +12,8 @@
 #define RGB_MATRIX_TYPING_HEATMAP_DECREASE_DELAY_MS 50
 /* If you're setting colors per key, this is required. */
 #define SPLIT_LAYER_STATE_ENABLE
-
+/* Overrides default of RGB_MATRIX_BREATHING */
+#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_GRADIENT_LEFT_RIGHT
 /* If you type too fast, it confuses the Mod key combos. This resolves it: */
 #define IGNORE_MOD_TAP_INTERRUPT
 

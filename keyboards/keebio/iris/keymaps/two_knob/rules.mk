@@ -13,3 +13,9 @@ ENCODER_MAP_ENABLE = yes
 # This is enabled by the parent iris rev6a config - turning it off saves us some space.
 # You can find the other iris default options here:  keyboards/keebio/iris/rev6a/rules.mk
 CONSOLE_ENABLE = no
+# Enable link time optimization
+# Trade longer compile time for smaller firmware size
+LTO_ENABLE = yes
+# Change keymaps without flashing
+# https://caniusevia.com/
+VIA_ENABLE = yes
