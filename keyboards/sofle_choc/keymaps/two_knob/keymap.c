@@ -165,16 +165,14 @@ static void print_status_narrow(void) {
     oled_write_ln_P(PSTR("LAYER"), false);
     switch (layer_state) {
         case _QWERTY:
-            oled_write_P(PSTR(" (1) \nQWERTY\n"), false);
+            oled_write_P(PSTR(" (1) \nBASE\n"), false);
             break;
         case _RAISE:
-            oled_write_P(PSTR(" (2) \nMOUSE"), false);
-            break;
-        case _LOWER:
-            oled_write_P(PSTR(" (3) \nNUMBO"), false);
+            oled_write_P(PSTR(" (2) \nMOUSi\n"), false);
             break;
         default:
-            oled_write_ln_P(PSTR("WTFBBQ\n??????"), false);
+            oled_write_P(PSTR(" (3) \nNUMBo\n"), false);
+            break;
     }
 }
 
