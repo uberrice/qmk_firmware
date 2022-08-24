@@ -159,31 +159,11 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 #ifdef OLED_ENABLE
 
 static void print_status_narrow(void) {
-    // Print current mode
+    // Add padding below top of screen.
     oled_write_P(PSTR("\n\n"), false);
-    // oled_write_ln_P(PSTR("MODE"), false);
-    // oled_write_ln_P(PSTR(""), false);
-    // if (keymap_config.swap_lctl_lgui) {
-    //     oled_write_ln_P(PSTR("MAC"), false);
-    // } else {
-    //     oled_write_ln_P(PSTR("WIN"), false);
-    // }
-
-    // switch (get_highest_layer(default_layer_state)) {
-    //     case _QWERTY:
-    //         oled_write_ln_P(PSTR("Qwrt"), false);
-    //         break;
-        // case _COLEMAK:
-        //     oled_write_ln_P(PSTR("Clmk"), false);
-        //     break;
-        // default:
-        //     oled_write_P(PSTR("Undef"), false);
-    // }
-    // oled_write_P(PSTR("\n\n"), false);
     // Print current layer
     oled_write_ln_P(PSTR("LAYER"), false);
     switch (layer_state) {
-        // case _COLEMAK:
         case _QWERTY:
             oled_write_P(PSTR(" (1) \nQWERTY\n"), false);
             break;
@@ -193,18 +173,9 @@ static void print_status_narrow(void) {
         case _LOWER:
             oled_write_P(PSTR(" (3) \nNUMBO"), false);
             break;
-        // case _ADJUST:
-        //     oled_write_P(PSTR("Adj\n"), false);
-        //     break;
-        // case _MOUSE:
-        //     oled_write_P(PSTR("Mouse\n"), false);
-        //     break;
-        // default:
-        //     oled_write_ln_P(PSTR("Undef"), false);
+        default:
+            oled_write_ln_P(PSTR("WTFBBQ\n??????"), false);
     }
-    // oled_write_P(PSTR("\n\n"), false);
-    // led_t led_usb_state = host_keyboard_led_state();
-    // oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {

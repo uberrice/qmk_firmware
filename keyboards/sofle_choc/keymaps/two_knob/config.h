@@ -87,7 +87,7 @@
 #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_TYPING_HEATMAP
 
 // Animations
-// Uncomment any that you want to try. Limited by
+// Uncomment any that you want to try. Lifmited by
 // space on the microcontroller. The defines below
 // mirror the order they animations will cycle through.
   
