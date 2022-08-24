@@ -36,9 +36,11 @@ TAP_DANCE_ENABLE = yes
 # Dynamic Tapping Term:
 DYNAMIC_TAPPING_TERM_ENABLE = no
 
+# Lets you use escape and tilde from the same key.
+GRAVE_ESC_ENABLE = yes
+
 # Trim off some features to free up space.
 SPACE_CADET_ENABLE = no
-GRAVE_ESC_ENABLE = no 
 MAGIC_ENABLE = no
 MUSIC_ENABLE = no
 VERBOSE = no
