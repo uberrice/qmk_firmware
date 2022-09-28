@@ -36,7 +36,7 @@ enum custom_keycodes {
  */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { // buttion closest to usb is first
     /* Right hand */
-    [_MAIN] = LAYOUT_ortho_1x5(KC_RGHT, KC_NO, KC_NO, KC_NO, KC_ESC)
+    [_MAIN] = LAYOUT_ortho_1x5(KC_RGHT, KC_NO, KC_NO, KC_NO, RGB_TOG)
     /* Left hand */
     // [_MAIN] = LAYOUT_ortho_1x5(KC_ENT, KC_NO, KC_NO, KC_NO, KC_MACLOCK);
 };
