@@ -51,6 +51,26 @@
         [_TD_FIVE_ENTER] = ACTION_TAP_DANCE_DOUBLE(KC_5, KC_ENT),
     };
 
+    // Leader key stuff
+
+    void leader_start_user(void) {
+    // Do something when the leader key is pressed
+    }
+
+    void leader_end_user(void) {
+        if (leader_sequence_one_key(KC_F)) {
+            // Leader, f => Types the below string
+            SEND_STRING("QMK is awesome.");
+        } else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
+            // Leader, d, d, s => Types the below string
+            SEND_STRING("https://start.duckduckgo.com\n");
+        } else if (leader_sequence_two_keys(KC_S, KC_S)) {
+            // Leader, s, s => GUI+S
+            // Take screenshot
+            tap_code16(LGUI(LSFT(KC_S)));
+        }
+    }
+
     /**
      * Keymap.
      * The rotary encoders are programmed manually below because the configurator does not support them yet.
@@ -66,7 +86,7 @@
             ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
             │CTL│ A │ S │ D │ F │ G │               │ H │ J │ K │ L │ ; │ ' │
             ├───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┤
-            │Sft│ Z │ X │ C │ V │ B │Ply│       │---│ N │ M │ , │ . │ / │ \ │
+            │Sft│ Z │ X │ C │ V │ B │Ply│       │LDR│ N │ M │ , │ . │ / │ \ │
             └───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┘
                     ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
                     │MO2│Win│LAl│Spc│Bsp│       │Ent│RAl│Del│GEs│MO3│ 
@@ -76,7 +96,7 @@
             KC_EQL,       KC_1,         KC_2,         KC_3,    KC_4,      KC_5,                                         KC_6,   KC_7,         KC_8,     KC_9,         KC_0,            KC_MINS, 
             KC_TAB,       KC_Q,         KC_W,         KC_E,    KC_R,      KC_T,                                         KC_Y,   KC_U,         KC_I,     KC_O,         KC_P,            KC_BACKSPACE, 
             KC_LEFT_CTRL, KC_A,         KC_S,         KC_D,    KC_F,      KC_G,                                         KC_H,   KC_J,         KC_K,     KC_L,         LT(2,KC_SCLN),   LT(1,KC_QUOT), 
-            KC_LSFT,      KC_Z,         KC_X,         KC_C,    KC_V,      KC_B,              KC_MPLY,           KC_MAXIM,   KC_N,   KC_M,     KC_COMM,  KC_DOT,       RALT_T(KC_SLSH), KC_BSLS, 
+            KC_LSFT,      KC_Z,         KC_X,         KC_C,    KC_V,      KC_B,              KC_MPLY,           QK_LEAD,   KC_N,   KC_M,     KC_COMM,  KC_DOT,       RALT_T(KC_SLSH), KC_BSLS, 
                                                     MO(1), KC_LGUI,       KC_LALT, KC_SPC,   KC_BACKSPACE,      KC_ENTER,   KC_SPC, KC_DEL,  QK_GESC,  MO(2)
         ),
 
@@ -321,16 +341,16 @@
         oled_write_P(PSTR("\n"), false);
         switch (get_highest_layer(layer_state)) {
             case _QWERTY:
-                oled_write_P(PSTR("QWERTY"), false);
+                oled_write_P(PSTR("QWERTY    "), false);
                 break;
             case _LOWER:
-                oled_write_P(PSTR("Nums+"), false);
+                oled_write_P(PSTR("Nums+Syms "), false);
                 break;
             case _RAISE:
-                oled_write_P(PSTR("Navig"), false);
+                oled_write_P(PSTR("Navigation"), false);
                 break;
             default:
-                oled_write_P(PSTR("Unkno"), false);
+                oled_write_P(PSTR("Unknown   "), false);
                 break;
         }
     }
