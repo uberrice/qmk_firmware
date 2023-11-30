@@ -5,7 +5,7 @@
 
 // Split Keyboard Stuff
 #define EE_HANDS                 // Sets the keyboard’s handedness using EEPROM
-#define SERIAL_USART_FULL_DUPLEX // Use full duplex communication (TRRS)
+//#define SERIAL_USART_FULL_DUPLEX // Use full duplex communication (TRRS)
 #define SERIAL_USART_TX_PIN GP16 // USART TX pin
 #define SERIAL_USART_RX_PIN GP17  // USART RX pin
 #define SERIAL_USART_PIN_SWAP  // Swap TX and RX pins if keyboard is master halve. (Only available on some MCUs)
