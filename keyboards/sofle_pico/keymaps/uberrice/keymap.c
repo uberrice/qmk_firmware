@@ -3,7 +3,7 @@
 
     #include QMK_KEYBOARD_H
 
-    enum custom_layers { _QWERTY, _LOWER, _RAISE };
+    enum custom_layers { _QWERTY, _GAMING, _LOWER, _RAISE };
 
     /* Defines macros for use with the configurators "Any" key. (These are non-standard macros using the "Magnet" app on Mac). */
     /* Move active application right WSP. */
@@ -89,15 +89,38 @@
             │Sft│ Z │ X │ C │ V │ B │Ply│       │LDR│ N │ M │ , │ . │ / │ \ │
             └───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┘
                     ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
-                    │MO2│Win│LAl│Spc│Bsp│       │Ent│RAl│Del│GEs│MO3│ 
+                    │MO3│Win│LAl│Spc│Bsp│       │Ent│RAl│Del│GEs│MO2│ 
                     └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
         */
         [_QWERTY] = LAYOUT(
             KC_EQL,       KC_1,         KC_2,         KC_3,    KC_4,      KC_5,                                         KC_6,   KC_7,         KC_8,     KC_9,         KC_0,            KC_MINS, 
             KC_TAB,       KC_Q,         KC_W,         KC_E,    KC_R,      KC_T,                                         KC_Y,   KC_U,         KC_I,     KC_O,         KC_P,            KC_BACKSPACE, 
-            KC_LEFT_CTRL, KC_A,         KC_S,         KC_D,    KC_F,      KC_G,                                         KC_H,   KC_J,         KC_K,     KC_L,         LT(2,KC_SCLN),   LT(1,KC_QUOT), 
+            MT(MOD_LCTL, KC_ESC), KC_A,         KC_S,         KC_D,    KC_F,      KC_G,                                         KC_H,   KC_J,         KC_K,     KC_L,         LT(3,KC_SCLN),   LT(2,KC_QUOT), 
             KC_LSFT,      KC_Z,         KC_X,         KC_C,    KC_V,      KC_B,              KC_MPLY,           QK_LEAD,   KC_N,   KC_M,     KC_COMM,  KC_DOT,       RALT_T(KC_SLSH), KC_BSLS, 
-                                                    MO(1), KC_LGUI,       KC_LALT, KC_SPC,   KC_BACKSPACE,      KC_ENTER,   KC_SPC, KC_DEL,  QK_GESC,  MO(2)
+                                                    TT(3), KC_LGUI,       KC_LALT, KC_SPC,   KC_BACKSPACE,      KC_ENTER,   KC_SPC, KC_DEL,  QK_GESC,  TT(2)
+        ),
+
+        /*
+            GAMING
+            ┌───┬───┬───┬───┬───┬───┐               ┌───┬───┬───┬───┬───┬───┐
+            │ = │ 1 │ 2 │ 3 │ 4 │ 5 │               │ 6 │ 7 │ 8 │ 9 │ 0 │ - │
+            ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
+            │Tab│ Q │ W │ E │ R │ T │               │ Y │ U │ I │ O │ P │Bsp│
+            ├───┼───┼───┼───┼───┼───┤               ├───┼───┼───┼───┼───┼───┤
+            │CTL│ A │ S │ D │ F │ G │               │ H │ J │ K │ L │ ; │ ' │
+            ├───┼───┼───┼───┼───┼───┼───┐       ┌───┼───┼───┼───┼───┼───┼───┤
+            │Sft│ Z │ X │ C │ V │ B │Ply│       │LDR│ N │ M │ , │ . │ / │ \ │
+            └───┴───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┴───┘
+                    ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
+                    │MO2│Win│LAl│Spc│Bsp│       │Ent│RAl│Del│GEs│MO3│ 
+                    └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
+        */
+        [_GAMING] = LAYOUT(
+            KC_EQL,       KC_1,         KC_2,         KC_3,    KC_4,      KC_5,                                         KC_6,   KC_7,         KC_8,     KC_9,         KC_0,            KC_MINS, 
+            KC_TAB,       KC_Q,         KC_W,         KC_E,    KC_R,      KC_T,                                         KC_Y,   KC_U,         KC_I,     KC_O,         KC_P,            KC_BACKSPACE, 
+            KC_LEFT_CTRL, KC_A,         KC_S,         KC_D,    KC_F,      KC_G,                                         KC_H,   KC_J,         KC_K,     KC_L,         LT(3,KC_SCLN),   LT(2,KC_QUOT), 
+            KC_LSFT,      KC_Z,         KC_X,         KC_C,    KC_V,      KC_B,              KC_MPLY,           QK_LEAD,   KC_N,   KC_M,     KC_COMM,  KC_DOT,       RALT_T(KC_SLSH), KC_BSLS, 
+                                                    MO(3), KC_LGUI,       KC_LALT, KC_SPC,   KC_BACKSPACE,      KC_ENTER,   KC_SPC, KC_DEL,  QK_GESC,  MO(2)
         ),
 
         /*
@@ -129,7 +152,7 @@
             ┌────┬────┬────┬────┬────┬────┐               ┌────┬────┬────┬────┬────┬────┐
             │RGB │ACL0│ACL1│ACL2│____│____│               │____│____│MOD │RMOD│HUI │HUD │
             ├────┼────┼────┼────┼────┼────┤               ├────┼────┼────┼────┼────┼────┤
-            │____│____│____│MS_U│____│____│               │____│BTN1│ ↑  │BTN2│SAI │SAD │
+            │TG1_│____│____│MS_U│____│____│               │____│BTN1│ ↑  │BTN2│SAI │SAD │
             ├────┼────┼────┼────┼────┼────┤               ├────┼────┼────┼────┼────┼────┤
             │____│____│MS_L│MS_D│MS_R│____│               │____│ ←  │ ↓  │ →  │VAI │VAD │
             ├────┼────┼────┼────┼────┼────┼────┐     ┌────┼────┼────┼────┼────┼────┼────┤
@@ -141,14 +164,17 @@
         */ 
         [_RAISE] = LAYOUT(
             RGB_TOG, KC_ACL0, KC_ACL1, KC_ACL2, KC_TRNS, KC_TRNS,                                      KC_TRNS, KC_TRNS, RGB_MOD, RGB_RMOD, RGB_HUI, RGB_HUD, 
-            KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS,                                      KC_TRNS, KC_BTN1, KC_UP,   KC_BTN2,  RGB_SAI, RGB_SAD, 
+            TG(1), KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS,                                      KC_TRNS, KC_BTN1, KC_UP,   KC_BTN2,  RGB_SAI, RGB_SAD, 
             KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,                                      KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT,  RGB_VAI, RGB_VAD, 
             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS,    KC_TRNS,        KC_TRNS, KC_PGUP, KC_TRNS, KC_PGDN,  RGB_SPI, RGB_SPD, 
                                        KC_TRNS, KC_TRNS, KC_TRNS, KC_WS_LEFT, KC_CSGLA,   KC_CSGRA, KC_WS_RIGHT, KC_TRNS, KC_TRNS, KC_TRNS)
         // clang-format on
     };
-
+    
+    uint8_t mod_state;
     bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+        mod_state = get_mods();
+
         switch (keycode) {
             case QWERTY:
                 if (record->event.pressed) {
@@ -179,6 +205,36 @@
                     unregister_code(KC_TAB);
                 }
                 break;
+            case KC_BSPC: // if shift is pressed, bspc becomes del
+            {
+                // Initialize a boolean variable that keeps track
+                // of the delete key status: registered or not?
+                static bool delkey_registered;
+                if (record->event.pressed) {
+                    // Detect the activation of either shift keys
+                    if (mod_state & MOD_MASK_SHIFT) {
+                        // First temporarily canceling both shifts so that
+                        // shift isn't applied to the KC_DEL keycode
+                        del_mods(MOD_MASK_SHIFT);
+                        register_code(KC_DEL);
+                        // Update the boolean variable to reflect the status of KC_DEL
+                        delkey_registered = true;
+                        // Reapplying modifier state so that the held shift key(s)
+                        // still work even after having tapped the Backspace/Delete key.
+                        set_mods(mod_state);
+                        return false;
+                    }
+                } else { // on release of KC_BSPC
+                    // In case KC_DEL is still being sent even after the release of KC_BSPC
+                    if (delkey_registered) {
+                        unregister_code(KC_DEL);
+                        delkey_registered = false;
+                        return false;
+                    }
+            }
+        // Let QMK process the KC_BSPC keycode as usual outside of shift
+        return true;
+    }
         }
         return true;
     }
@@ -286,10 +342,7 @@
             0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0x80, 0x9e, 0xbf, 0x7f, 0xf1, 0xe0, 0xe0, 0x30, 0x10, 0x08, 0x0c, 
             0x04, 0x02, 0x02, 0x00, 0x01, 0x00, 0x00, 0x80, 0xe0, 0xf8, 0xfe, 0x7f, 0x1f, 0x03, 0x00, 0x00, 
             0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x07, 0x07, 0x0e, 0x1e, 0x1c, 0x3c, 0x38, 0x38, 0x38, 0x38, 
-            0x18, 0x9c, 0xce, 0xef, 0xff, 0xfd, 0xfe, 0x1e, 0x0f, 0x07, 0x03, 0x03, 0x01, 0x01, 0x01, 0x01, 
-            0x01, 0x01, 0x01, 0x01, 0x03, 0x03, 0x07, 0x0f, 0x1f, 0xff, 0xff, 0xff, 0xff, 0xce, 0x9c, 0x1c, 
-            0x1c, 0x1c, 0x1c, 0x1c, 0x1e, 0x0f, 0x07, 0x07, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xf8, 0xfc, 
+            0x18, 0x9c, 0xce, 0xef, 0xff, 0xfd, 0xfe, 0x1e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xf8, 0xfc, 
             0x3f, 0x1f, 0x1f, 0x1f, 0x3f, 0x7f, 0xff, 0xe0, 0xc0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xc0, 0xf0, 0xfe, 0x3f, 0x1f, 0x0f, 0x0f, 0x1f, 0x3f, 
             0xfc, 0xf8, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -342,6 +395,9 @@
         switch (get_highest_layer(layer_state)) {
             case _QWERTY:
                 oled_write_P(PSTR("QWERTY    "), false);
+                break;
+            case _GAMING:
+                oled_write_P(PSTR("Gaming    "), false);
                 break;
             case _LOWER:
                 oled_write_P(PSTR("Nums+Syms "), false);
