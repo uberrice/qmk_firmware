@@ -262,8 +262,7 @@ void matrix_scan_user(void) {
  * This uses the amazing "Encoder map" feature which replicates the normal keyswitch layer handling functionality, but with encoders.
  * https://docs.qmk.fm/#/feature_encoders?id=encoder-map
  *
- * Uses a variant of the Super-alt-tab macro to switch between open applications on a mac. (Command-tab)
- * https://docs.qmk.fm/#/feature_macros?id=super-alt%e2%86%aftab
+ * Changed to do alt-tab because no mac
  */
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
