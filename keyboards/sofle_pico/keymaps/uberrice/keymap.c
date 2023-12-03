@@ -53,22 +53,27 @@ tap_dance_action_t tap_dance_actions[] = {
 
 // Leader key stuff
 
+uint8_t leader_on = 0;
+
 void leader_start_user(void) {
 // Do something when the leader key is pressed
+    leader_on = 1;
 }
 
 void leader_end_user(void) {
-    if (leader_sequence_one_key(KC_F)) {
-        // Leader, f => Types the below string
-        SEND_STRING("QMK is awesome.");
-    } else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
+    if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
         // Leader, d, d, s => Types the below string
         SEND_STRING("https://start.duckduckgo.com\n");
     } else if (leader_sequence_two_keys(KC_S, KC_S)) {
         // Leader, s, s => GUI+S
         // Take screenshot
         tap_code16(LGUI(LSFT(KC_S)));
+    } else if (leader_sequence_two_keys(KC_W, KC_Q)) {
+        tap_code16(LALT(KC_F4));
+    } else if (leader_sequence_two_keys(KC_G, KC_A)){ //actiate gaming layer
+        layer_invert(_GAMING);
     }
+    leader_on = 0;
 }
 
 /**
@@ -156,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ├────┼────┼────┼────┼────┼────┤               ├────┼────┼────┼────┼────┼────┤
         │____│____│MS_L│MS_D│MS_R│____│               │____│ ←  │ ↓  │ →  │VAI │VAD │
         ├────┼────┼────┼────┼────┼────┼────┐     ┌────┼────┼────┼────┼────┼────┼────┤
-        │____│____│____│____│____│____│____│     │____│____│PGUP│____│PGDN│SPI │SPD │
+        │____│____│____│____│____│____│BOOT│     │____│____│PGUP│____│PGDN│SPI │SPD │
         └────┴────┴────┴────┴────┴────┴────┘     └────┴────┴────┴────┴────┴────┴────┘
                     ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
                     │___│___│___│___│QMK│       │QMK│___│___│___│___│
@@ -166,7 +171,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RGB_TOG, KC_ACL0, KC_ACL1, KC_ACL2, KC_TRNS, KC_TRNS,                                      KC_TRNS, KC_TRNS, RGB_MOD, RGB_RMOD, RGB_HUI, RGB_HUD, 
         TG(1), KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS,                                      KC_TRNS, KC_BTN1, KC_UP,   KC_BTN2,  RGB_SAI, RGB_SAD, 
         KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,                                      KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT,  RGB_VAI, RGB_VAD, 
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS,    KC_TRNS,        KC_TRNS, KC_PGUP, KC_TRNS, KC_PGDN,  RGB_SPI, RGB_SPD, 
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          QK_BOOT,    KC_TRNS,        KC_TRNS, KC_PGUP, KC_TRNS, KC_PGDN,  RGB_SPI, RGB_SPD, 
                                     KC_TRNS, KC_TRNS, KC_TRNS, KC_WS_LEFT, KC_CSGLA,   KC_CSGRA, KC_WS_RIGHT, KC_TRNS, KC_TRNS, KC_TRNS)
     // clang-format on
 };
@@ -341,7 +346,10 @@ static void render_logo(void) {
         0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0x80, 0x9e, 0xbf, 0x7f, 0xf1, 0xe0, 0xe0, 0x30, 0x10, 0x08, 0x0c, 
         0x04, 0x02, 0x02, 0x00, 0x01, 0x00, 0x00, 0x80, 0xe0, 0xf8, 0xfe, 0x7f, 0x1f, 0x03, 0x00, 0x00, 
         0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x07, 0x07, 0x0e, 0x1e, 0x1c, 0x3c, 0x38, 0x38, 0x38, 0x38, 
-        0x18, 0x9c, 0xce, 0xef, 0xff, 0xfd, 0xfe, 0x1e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xf8, 0xfc, 
+        0x18, 0x9c, 0xce, 0xef, 0xff, 0xfd, 0xfe, 0x1e, 0x0f, 0x07, 0x03, 0x03, 0x01, 0x01, 0x01, 0x01, 
+        0x01, 0x01, 0x01, 0x01, 0x03, 0x03, 0x07, 0x0f, 0x1f, 0xff, 0xff, 0xff, 0xff, 0xce, 0x9c, 0x1c, 
+        0x1c, 0x1c, 0x1c, 0x1c, 0x1e, 0x0f, 0x07, 0x07, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xf8, 0xfc, 
         0x3f, 0x1f, 0x1f, 0x1f, 0x3f, 0x7f, 0xff, 0xe0, 0xc0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xc0, 0xf0, 0xfe, 0x3f, 0x1f, 0x0f, 0x0f, 0x1f, 0x3f, 
         0xfc, 0xf8, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -393,20 +401,25 @@ static void render_status(void) {
     oled_write_P(PSTR("\n"), false);
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
-            oled_write_P(PSTR("QWERTY    "), false);
+            oled_write_P(PSTR("QWERTY\n"), false);
             break;
         case _GAMING:
-            oled_write_P(PSTR("Gaming    "), false);
+            oled_write_P(PSTR("Gaming\n"), false);
             break;
         case _LOWER:
-            oled_write_P(PSTR("Nums+Syms "), false);
+            oled_write_P(PSTR("Nums+Syms\n"), false);
             break;
         case _RAISE:
-            oled_write_P(PSTR("Navigation"), false);
+            oled_write_P(PSTR("Navigation\n"), false);
             break;
         default:
-            oled_write_P(PSTR("Unknown   "), false);
+            oled_write_P(PSTR("Unknown\n"), false);
             break;
+    }
+    if(leader_on) {
+        oled_write_P(PSTR("Leader\n"), false);
+    } else {
+        oled_write_P(PSTR("\n"), false);
     }
 }
 
@@ -424,6 +437,7 @@ bool oled_task_user(void) {
         if (!finished_logo) {
             // Clears the OLED.
             oled_clear();
+            finished_logo = true;
         } else {
             finished_logo = true;
         }
@@ -434,7 +448,7 @@ bool oled_task_user(void) {
         }
         return false;
     }
-    return true;
+    return false;
 }
 
 #endif

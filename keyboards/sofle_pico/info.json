@@ -40,7 +40,7 @@
         "time_to_max": 40
     },
     "tapping": {
-        "term": 210
+        "term": 100
     },
     "rgb_matrix": {
         "driver": "ws2812",
